@@ -9,15 +9,6 @@ double calculate_bbox_area(bbox * bboxPtr) {
     return delta_x * delta_y;
 }
 
-char * parse_double() {
-    //do not forget to free
-}
-
-
-bbox * create_bbox_ptr_from_string(char * bboxString) {
-    // -15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968
-    // strtod()
-}
 
 
 bbox * create_bbox_ptr(double min_x, double max_x, double min_y, double max_y) {
@@ -48,3 +39,13 @@ bool bbox_contains_point(bbox * bbox, point * point) {
 }
 
 
+
+// char * parse_double() {
+//     //do not forget to free
+// }
+
+
+// bbox * create_bbox_ptr_from_string(char * bboxString) {
+//     // -15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968
+//     // strtod()
+// }
