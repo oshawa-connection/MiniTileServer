@@ -5,6 +5,7 @@
 #include "../headers/point.h"
 #include <stdlib.h>
 #include <time.h>
+#include<regex.h>
 
 #define DEBUG
 
@@ -26,53 +27,57 @@ void drawPoint(point * point, bbox * bbox,cairo_t *cr) {
     cairo_fill (cr);
 }
 
+
 // We will need to store lots of points in memory rather than in DB.
 // Otherwise we will have to query each time.
 // Maybe with an RTree? ;-)
 int main (int argc, char *argv[]) {
+    char * myString ="-15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968";
+    create_bbox_ptr_from_string(myString);
 
-    time_t t;
 
-    /* Intializes random number generator */
-    srand((unsigned) time(&t));
 
-    bbox * bboxPtr = create_bbox_ptr(0,1000,0,1000);
-    point some_point = {234.0,500};
-
-    cairo_surface_t *surface =
-        cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 255, 255);
-    cairo_t *cr =
-        cairo_create (surface);
-
-#ifdef DEBUG
-    cairo_set_source_rgb (cr, 1, 1, 1);
-    cairo_paint(cr);
-#endif
-    cairo_set_source_rgb (cr, 0, 0, 0);
     
-    pointCollection * some_collection = create_point_collection();
-    
-    struct point * new_point = NULL;
+//     time_t t;
 
-    for(int i =0; i<100;i++) {
+//     /* Intializes random number generator */
+//     srand((unsigned) time(&t));
+
+//     bbox * bboxPtr = create_bbox_ptr(0,1000,0,1000);
+//     point some_point = {234.0,500};
+
+//     cairo_surface_t *surface =
+//         cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 255, 255);
+//     cairo_t *cr =
+//         cairo_create (surface);
+
+// #ifdef DEBUG
+//     cairo_set_source_rgb (cr, 1, 1, 1);
+//     cairo_paint(cr);
+// #endif
+//     cairo_set_source_rgb (cr, 0, 0, 0);
+    
+//     pointCollection * some_collection = create_point_collection();
+    
+//     struct point * new_point = NULL;
+
+//     for(int i =0; i<100;i++) {
         
-        double rand_x = (double)(rand() % 1001);
-        double rand_y = (double)(rand() % 1001);
-        new_point = create_new_point(rand_x,rand_y);
-        add_point_to_collection(some_collection,new_point);
-    }
+//         double rand_x = (double)(rand() % 1001);
+//         double rand_y = (double)(rand() % 1001);
+//         new_point = create_new_point(rand_x,rand_y);
+//         add_point_to_collection(some_collection,new_point);
+//     }
 
-    point * found_point = NULL;
-    for (int i = 0;i<10;i++) {
-        found_point = get_point_from_collection(some_collection,i);
-        drawPoint(found_point,bboxPtr,cr);
-    }
+//     point * found_point = NULL;
+//     for (int i = 0;i<10;i++) {
+//         found_point = get_point_from_collection(some_collection,i);
+//         drawPoint(found_point,bboxPtr,cr);
+//     }
     
-
-
-    cairo_destroy (cr);
-    cairo_surface_write_to_png (surface, "hello.png");
-    cairo_surface_destroy (surface);
-    printf("GOODBYE\n");
+//     cairo_destroy (cr);
+//     cairo_surface_write_to_png (surface, "hello.png");
+//     cairo_surface_destroy (surface);
+//     printf("GOODBYE\n");
     return 0;
 }
