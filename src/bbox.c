@@ -92,12 +92,13 @@ void create_bbox_ptr_from_string(char * bboxString) {
     int max_len = strlen(bboxString);
     int current_string_index = 0;
     double myDouble;
+    bbox * new_bbox = (bbox *) malloc(sizeof(bbox));
     while (current_index < max_len) {
         current_char = bboxString[current_index];
         if (current_char == '%') {
             switch (current_count_match) {
                 case 0:
-                    myDouble = atof(current_string);                    
+                    myDouble = atof(current_string);
                     break;
                 case 1:
                     break;
@@ -122,4 +123,5 @@ void create_bbox_ptr_from_string(char * bboxString) {
         }
         current_index += 1;
     }
+    free(current_string);
 }
