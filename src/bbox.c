@@ -81,3 +81,45 @@ void create_bbox_ptr_from_string_regex(char * bboxString) {
         printf("Parsed double is: %f",myDouble);
     }
 }
+
+
+void create_bbox_ptr_from_string(char * bboxString) {
+    char * current_string = (char * ) malloc(sizeof(char) * 100);
+    memset(current_string,'\0',100);
+    char current_char = '\0';
+    int current_index = 0; 
+    short current_count_match = 0;
+    int max_len = strlen(bboxString);
+    int current_string_index = 0;
+    double myDouble;
+    while (current_index < max_len) {
+        current_char = bboxString[current_index];
+        if (current_char == '%') {
+            switch (current_count_match) {
+                case 0:
+                    myDouble = atof(current_string);                    
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+        
+                case 3:
+                    break;
+                default:
+                    fprintf(stderr, "Invalid BBOX string %s",bboxString);
+                    exit(1);
+                    break;
+            }
+            current_count_match += 1;
+            memset(current_string,'\0',100);
+        } else {
+            
+            current_string[current_string_index] = current_char;
+            current_string_index += 1;
+            // strcat(current_string,&current_char);
+            
+        }
+        current_index += 1;
+    }
+}

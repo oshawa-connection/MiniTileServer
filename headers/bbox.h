@@ -20,3 +20,6 @@ bool bbox_contains_point(bbox * bboxPtr, point * point);
 
 
 void create_bbox_ptr_from_string_regex(char * bboxString);
+
+
+void create_bbox_ptr_from_string(char * bboxString);
