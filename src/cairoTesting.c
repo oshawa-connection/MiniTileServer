@@ -42,6 +42,7 @@ int main (int argc, char *argv[]) {
     create_bbox_ptr_from_string(myString);
 
     printf("NO CRASH \n");
+    
 
     
 //     time_t t;
