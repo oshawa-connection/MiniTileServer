@@ -1,2 +1,13 @@
-*.out
-*.png
+
+lib/
+CMakeFiles/
+_deps/
+CMakeCache.txt
+CTestTestfile.CMakeCache
+hello_test
+hello_test[1]_include.cmake
+hello_test[1]_tests.cmake
+tileserver
+*.cmake
+!cmake/Modules/FindCairo.cmake
+Makefile

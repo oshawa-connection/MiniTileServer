@@ -83,7 +83,8 @@ void create_bbox_ptr_from_string_regex(char * bboxString) {
 }
 
 
-void create_bbox_ptr_from_string(char * bboxString) {
+bbox * create_bbox_ptr_from_string(char * bboxString) {
+    // bbox * bbox = create_bbox_ptr(0,0,0,0);
     char * current_string = (char * ) malloc(sizeof(char) * 100);
     memset(current_string,'\0',100);
     char current_char = '\0';
@@ -93,19 +94,23 @@ void create_bbox_ptr_from_string(char * bboxString) {
     int current_string_index = 0;
     double myDouble;
     bbox * new_bbox = (bbox *) malloc(sizeof(bbox));
+    
     while (current_index < max_len) {
         current_char = bboxString[current_index];
-        if (current_char == '%') {
+        if (current_char == '%' || current_index == max_len -1 ) {
+            myDouble = atof(current_string);
             switch (current_count_match) {
                 case 0:
-                    myDouble = atof(current_string);
+                    new_bbox->min_x = myDouble;
                     break;
                 case 1:
+                    new_bbox->min_y = myDouble;
                     break;
                 case 2:
+                    new_bbox->max_x = myDouble;
                     break;
-        
                 case 3:
+                    new_bbox->max_y = myDouble;
                     break;
                 default:
                     fprintf(stderr, "Invalid BBOX string %s",bboxString);
@@ -113,15 +118,16 @@ void create_bbox_ptr_from_string(char * bboxString) {
                     break;
             }
             current_count_match += 1;
+            current_string_index = 0;
+            current_index += 2;
             memset(current_string,'\0',100);
         } else {
             
             current_string[current_string_index] = current_char;
-            current_string_index += 1;
-            // strcat(current_string,&current_char);
-            
+            current_string_index += 1;            
         }
         current_index += 1;
     }
     free(current_string);
+    return new_bbox;
 }

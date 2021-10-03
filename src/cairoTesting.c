@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include<regex.h>
+#include <string.h>
+#include "bbox_tests.c"
+
 
 #define DEBUG
 
@@ -32,6 +35,9 @@ void drawPoint(point * point, bbox * bbox,cairo_t *cr) {
 // Otherwise we will have to query each time.
 // Maybe with an RTree? ;-)
 int main (int argc, char *argv[]) {
+    // printf("HELLO WORLD\n");
+    
+    
     char * myString ="-15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968";
     create_bbox_ptr_from_string(myString);
 
