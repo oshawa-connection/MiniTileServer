@@ -26,17 +26,18 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-  hello_test
-  tests/hello_test.cc
+  all_tests
+  tests/all_tests.cc
 )
 
 target_link_libraries(
-  hello_test
+  all_tests
   gtest_main
 )
 
+
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(all_tests)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
