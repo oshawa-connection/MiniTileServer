@@ -38,20 +38,26 @@ int main() {
     report("listen", 1); /* terminate */
 
   fprintf(stderr, "Listening on port %i for clients...\n", PortNumber);
-  FILE *f = fopen("topp-states.png", "r");
+  FILE *f = fopen("topp-states.png", "rb");
+  if (f == NULL) {
+    fprintf(stderr, "File did not exist");
+    exit(EXIT_FAILURE);
+  }
   fseek(f, 0, SEEK_END);
   long fsize = ftell(f);
+  printf("File had %zd\n",fsize);
   fseek(f, 0, SEEK_SET);  /* same as rewind(f); */
 
-  char *string = malloc(fsize + 1);
-  fread(string, 1, fsize, f);
+  char *string = malloc(sizeof(char * ) * fsize);
+  size_t readResult = fread(string, 1, fsize, f);
+  printf("Read %zu bytes from file\n",readResult);
   fclose(f);
 
-  string[fsize] = 0;
+  // string[fsize] = 0;
   /* a server traditionally listens indefinitely */
   while (1) {
     struct sockaddr_in caddr; /* client address */
-    int len = sizeof(caddr);  /* address length could change */
+    socklen_t len = sizeof(caddr);  /* address length could change */
 
     int client_fd = accept(fd, (struct sockaddr*) &caddr, &len);  /* accept blocks */
     if (client_fd < 0) {
@@ -75,19 +81,24 @@ int main() {
           "Last-Modified: Wed, 18 Jun 2003 16:05:58 GMT\n"
           "ETag: \"56d-9989200-1132c580\"\n"
           "Content-Type: image/png\n"
-          "Content-Length: 15\n"
+          "Content-Length: 5273\n"
           "Accept-Ranges: bytes\n"
           "Connection: close\n"
           "\n";
-        int strlenNeeded = strlen(reply) + strlen(string);
-        char * stringSomething = (char *)malloc(sizeof(char) * strlenNeeded);
+        int strlenNeeded = strlen(reply) + readResult;
+        printf("File has %lu\n",strlen(string));
+        char * stringSomething = (char *)malloc(sizeof(char *) * strlenNeeded);
         strcpy(stringSomething,reply);
-        strcat(stringSomething,string);
-        
+        printf("%lu\n",strlen(string));
+        // strcat(stringSomething,string);
+        // memset(stringSomething + strlen(stringSomething),string,);
+        char * dest = stringSomething + strlen(stringSomething);
+        memcpy(dest,string,readResult);
         // char * response = strcat(reply,string);
         printf("BYE WORLD\n");
+        
         // write(client_fd, buffer, sizeof(buffer)); /* echo as confirmation */
-        write(client_fd, stringSomething, strlen(stringSomething));
+        write(client_fd, stringSomething, strlenNeeded);
       }
     }
     close(client_fd); /* break connection */

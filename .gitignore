@@ -12,3 +12,7 @@ tileserver
 *.cmake
 !cmake/Modules/FindCairo.cmake
 Makefile
+server.out.dSYM/Contents/Resources/DWARF/server.out
+server.out.dSYM/Contents/Info.plist
+client.out
+.DS_Store

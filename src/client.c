@@ -9,7 +9,7 @@
 #include <netinet/tcp.h>
 #include <netdb.h>
 
-#define PortNumber      3000
+#define PortNumber      9875
 #define MaxConnects        8
 #define BuffSize         10000
 #define ConversationLen    3
@@ -52,7 +52,7 @@ int main() {
   puts("Connect to server, about to write some stuff...");
 
 
-  const char * httpRequest = "GET / HTTP/1.1\n"
+  const char * httpRequest = "GET /wms HTTP/1.1\n"
     "Host: localhost:3000/\n"
     "Connection: keep-alive\n"
     "sec-ch-ua: \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"\n"
@@ -73,10 +73,20 @@ int main() {
   ssize_t result = write(sockfd,httpRequest,strlen(httpRequest));
   char buffer[BuffSize + 1];
   memset(buffer, '\0', sizeof(buffer));
-  if (read(sockfd, buffer, sizeof(buffer)) > 0) {
+  ssize_t readResult = read(sockfd, buffer, sizeof(buffer));
+  if (readResult > 0) {
     puts(buffer);
+    printf("Read a total of %zd bytes", readResult);
   }
-    
+
+  // char * line = strtok(strdup(buffer),"\n");
+  // printf("%s",line);
+  
+  // strcmp(line,"\n");
+  FILE * file = fopen("myoutput.png","wb");
+  fwrite(buffer,readResult,sizeof(char),file);
+  fclose(file);
+
   // int i;
   // for (i = 0; i < ConversationLen; i++) {
   //   if (write(sockfd, books[i], strlen(books[i])) > 0) {
