@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "wiringpi.h": "c",
+        "list.h": "c",
+        "stdbool.h": "c",
+        "png.h": "c",
+        "ios": "c",
+        "bbox.h": "c",
+        "socket.h": "c",
+        "inet.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "point.h": "c",
+        "cstdio": "c",
+        "__bit_reference": "c",
+        "__string": "c",
+        "cstring": "c",
+        "regex.h": "c",
+        "cmath": "c",
+        "complex": "c",
+        "assert.h": "c",
+        "cairo.h": "c"
+    }
+}
