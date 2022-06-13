@@ -50,20 +50,23 @@ color * parseColorString(char * colorString) {
     
     color * newColor = createColor();
 
-    for (int groupIndex =0; groupIndex < numberOfGroups;groupIndex ++) {
+    for (int groupIndex =1; groupIndex < numberOfGroups;groupIndex ++) {
         regmatch_t currentMatch = groupArray[groupIndex];
         int colorStringLength = currentMatch.rm_eo - currentMatch.rm_so;
         char * parsedColourString = (char *)malloc(currentMatch.rm_eo - currentMatch.rm_so);
-        memset(parsedColourString,NULL_CHAR,colorStringLength);
-        strncpy( parsedColourString,  colorString + currentMatch.rm_so, currentMatch.rm_eo - currentMatch.rm_so );
 
-        if (0 == groupIndex) {
+        memset(parsedColourString,NULL_CHAR,colorStringLength);
+        // this is not correct as it doesn't account for commas?
+        strncpy( parsedColourString,  colorString + currentMatch.rm_so, currentMatch.rm_eo - currentMatch.rm_so );
+        if (1 == groupIndex) {
             newColor->red = atoi(parsedColourString);
-        } else if (1 == groupIndex) {
-            newColor->green = atoi(parsedColourString);
         } else if (2 == groupIndex) {
+            newColor->green = atoi(parsedColourString);
+        } else if (3 == groupIndex) {
             newColor->blue = atoi(parsedColourString);
         }
+        // Needed because memory will be recycled
+        memset(parsedColourString,NULL_CHAR,colorStringLength);
         free(parsedColourString);
         parsedColourString = NULL;
     }
