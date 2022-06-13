@@ -8,13 +8,13 @@
 #include<regex.h>
 #include <string.h>
 
-static cairo_status_t
-stdio_write_func (void *closure, const unsigned char *data, unsigned int length)
-{
+static cairo_status_t stdio_write_func (void *closure, const unsigned char *data, unsigned int length) {
     FILE *file = closure;
 
-    if (fwrite (data, 1, length, file) != length)
-	return CAIRO_STATUS_WRITE_ERROR;
+    if (fwrite (data, 1, length, file) != length) {
+        return CAIRO_STATUS_WRITE_ERROR;
+    }
+	
 
     return CAIRO_STATUS_SUCCESS;
 }
@@ -44,16 +44,10 @@ void drawPoint(point * point, bbox * bbox,cairo_t *cr) {
 // Otherwise we will have to query each time.
 // Maybe with an RTree? ;-)
 int main (int argc, char *argv[]) {
-    // printf("HELLO WORLD\n");
     
-    
-    char * myString ="-15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968";
+    const char * myString ="-15028131.257091932%2C5009377.085697312%2C-12523442.714243276%2C7514065.628545968";
     create_bbox_ptr_from_string(myString);
 
-    // printf("NO CRASH \n");
-    
-
-    
     time_t t;
 
     /* Intializes random number generator */
@@ -69,8 +63,8 @@ int main (int argc, char *argv[]) {
         cairo_t *cr = cairo_create (surface);
 
     // #ifdef DEBUG
-    //     cairo_set_source_rgb (cr, 1, 1, 1);
-    //     cairo_paint(cr);
+        cairo_set_source_rgb (cr, 1, 1, 1);
+        cairo_paint(cr);
     // #endif
         cairo_set_source_rgb (cr, 0, 0, 0);
         

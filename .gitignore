@@ -16,3 +16,4 @@ server.out.dSYM/Contents/Resources/DWARF/server.out
 server.out.dSYM/Contents/Info.plist
 client.out
 .DS_Store
+*.png

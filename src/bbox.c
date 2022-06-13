@@ -54,7 +54,7 @@ double parse_bbox_match(regmatch_t currentMatch,char * bboxString) {
 
 
 void create_bbox_ptr_from_string_regex(char * bboxString) {
-    char * bbox_matcher = "[0-9]{0,10}\\.[0-9]{0,9}";
+    const char * bbox_matcher = "[0-9]{0,10}\\.[0-9]{0,9}";
     regex_t regex;
     int reti = regcomp(&regex, bbox_matcher, 0);
     if (reti) {
@@ -67,7 +67,6 @@ void create_bbox_ptr_from_string_regex(char * bboxString) {
         fprintf(stderr, "Error while running regex: %s\n",bbox_matcher);
         exit(1);
     }
-    char *myString = (char*)malloc(sizeof(char) * 100);
     
     for (int matchCount = 0;matchCount < BBOX_MATCH_COUNT; matchCount ++) {
         regmatch_t currentMatch = matches[0];
@@ -84,14 +83,14 @@ void create_bbox_ptr_from_string_regex(char * bboxString) {
 
 
 bbox * create_bbox_ptr_from_string(char * bboxString) {
-    // bbox * bbox = create_bbox_ptr(0,0,0,0);
+    // Doesn't need to be heap allocated. Could make a regular array
     char * current_string = (char * ) malloc(sizeof(char) * 100);
     memset(current_string,'\0',100);
     char current_char = '\0';
-    int current_index = 0; 
+    size_t current_index = 0; 
     short current_count_match = 0;
-    int max_len = strlen(bboxString);
-    int current_string_index = 0;
+    size_t max_len = strlen(bboxString);
+    size_t current_string_index = 0;
     double myDouble;
     bbox * new_bbox = (bbox *) malloc(sizeof(bbox));
     
@@ -129,5 +128,6 @@ bbox * create_bbox_ptr_from_string(char * bboxString) {
         current_index += 1;
     }
     free(current_string);
+    current_string = NULL;
     return new_bbox;
 }

@@ -87,7 +87,7 @@ int main() {
           "\n";
         int strlenNeeded = strlen(reply) + readResult;
         printf("File has %lu\n",strlen(string));
-        char * stringSomething = (char *)malloc(sizeof(char *) * strlenNeeded);
+        char * stringSomething = malloc(sizeof(char) * strlenNeeded);
         strcpy(stringSomething,reply);
         printf("%lu\n",strlen(string));
         // strcat(stringSomething,string);
