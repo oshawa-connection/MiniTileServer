@@ -23,3 +23,7 @@ void create_bbox_ptr_from_string_regex(char * bboxString);
 
 
 bbox * create_bbox_ptr_from_string(char * bboxString);
+
+double dinterpolateY(double scale_min, double scale_max, bbox * bboxPtr,point * pointPtr);
+
+double dinterpolateX(double scale_min, double scale_max, bbox * bboxPtr,point * pointPtr);

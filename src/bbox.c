@@ -131,3 +131,13 @@ bbox * create_bbox_ptr_from_string(char * bboxString) {
     current_string = NULL;
     return new_bbox;
 }
+
+
+
+double dinterpolateY(double scale_min, double scale_max, bbox * bboxPtr,point * pointPtr) {
+    return (scale_max - scale_min) /(bboxPtr->max_y - bboxPtr->min_y) * (pointPtr->y);
+}
+
+double dinterpolateX(double scale_min, double scale_max, bbox * bboxPtr,point * pointPtr) {
+    return (scale_max - scale_min) /(bboxPtr->max_x - bboxPtr->min_x) * (pointPtr->x);
+}

@@ -1,11 +1,11 @@
 #pragma once
+#include "./color.h"
+#include "geometry.h"
 
-
-enum LAYER_TYPE {
-    first,
-    second
-};
-
+typedef enum LAYER_TYPE {
+    vector,
+    raster
+} LAYER_TYPE;
 
 /**
  * @brief Used during parsing.
@@ -25,5 +25,9 @@ typedef struct layerConfig {
  */
 typedef struct layer {
     LAYER_TYPE layerType;
-    
-};
+    GEOMETRY_TYPE geometryType;
+    color * outlineColor;
+    color * fillColor;
+    float strokeThickness;
+    int size;
+} layer;
