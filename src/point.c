@@ -1,16 +1,21 @@
 #include "../headers/point.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 point * create_new_point(double x, double y) {
     point * my_point = (point *) malloc(sizeof(point));
+    if (NULL == my_point) {
+        return 0;
+    }
     my_point->x=x;
     my_point->y=y;
     return my_point;
 }
 
 void destroy_point(point * pointToDestroy) {
-
+    free(pointToDestroy);
+    pointToDestroy = NULL;
 }
 
 pointCollection * create_point_collection() {
@@ -28,7 +33,7 @@ void destroy_point_collection() {
 void add_point_to_collection(pointCollection * collection, point * point) {
     if (collection->numberOfPoints == 100) {
         fprintf(stderr,"Exceeded test data size limits of 100");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     collection->points[collection->numberOfPoints] = point;
     collection->numberOfPoints +=1;

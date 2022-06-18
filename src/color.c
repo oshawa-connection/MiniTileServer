@@ -11,8 +11,15 @@ static regex_t regex;
 static bool isInitialised = false;
 
 
-color * createColor() {
+color * createColor(int red, int green, int blue, float alpha) {
     color * newColor = (color *)malloc(sizeof(color));
+    if (newColor == NULL) {
+        return 0;
+    }
+    newColor->red=red;
+    newColor->green=green;
+    newColor->blue=blue;
+    newColor->alpha=alpha;
     return newColor;
 }
 
@@ -48,7 +55,7 @@ color * parseColorString(char * colorString) {
         exit(EXIT_FAILURE);
     }
     
-    color * newColor = createColor();
+    color * newColor = createColor(0,0,0,0.0);
 
     for (int groupIndex =1; groupIndex < numberOfGroups;groupIndex ++) {
         regmatch_t currentMatch = groupArray[groupIndex];

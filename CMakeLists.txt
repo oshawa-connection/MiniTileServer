@@ -44,12 +44,35 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 FIND_PACKAGE(CAIRO REQUIRED)
 
 #main
+# add_executable(
+#   tileserver
+#   src/point.c 
+#   src/bbox.c 
+#   src/cairoTesting.c
+# )
+# # PRIVATE so only for current target. Will probably have to add this for google tests too.
+# target_include_directories(tileserver PRIVATE ${Cairo_INCLUDE_DIRS})
+# target_link_libraries(tileserver PRIVATE ${Cairo_LIBS})
+
+
 add_executable(
-  tileserver
-  src/point.c 
+  runit
+  src/draw_layer_testing.c 
   src/bbox.c 
-  src/cairoTesting.c
+  headers/bbox.h
+  src/source.c
+  headers/source.h
+  src/layer.c
+  headers/layer.h
+  src/color.c
+  headers/color.h
+  headers/geometry.h
+  src/point.c
+  headers/point.h
+  src/logging.c
+  headers/logging.h
 )
-# PRIVATE so only for current target. Will probably have to add this for google tests too.
-target_include_directories(tileserver PRIVATE ${Cairo_INCLUDE_DIRS})
-target_link_libraries(tileserver PRIVATE ${Cairo_LIBS})
+
+target_include_directories(runit PRIVATE "headers")
+target_include_directories(runit PRIVATE ${Cairo_INCLUDE_DIRS})
+target_link_libraries(runit PRIVATE ${Cairo_LIBS} m)

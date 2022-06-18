@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/MiniTileServer/tileserver",
+            "program": "${workspaceFolder}/runit",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
