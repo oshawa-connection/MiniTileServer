@@ -76,3 +76,15 @@ add_executable(
 target_include_directories(runit PRIVATE "headers")
 target_include_directories(runit PRIVATE ${Cairo_INCLUDE_DIRS})
 target_link_libraries(runit PRIVATE ${Cairo_LIBS} m)
+
+
+
+add_executable(
+  projectfileparsertest
+  src/projectfile_parser.c 
+  src/toml.c 
+)
+
+target_include_directories(projectfileparsertest PRIVATE "headers")
+target_include_directories(projectfileparsertest PRIVATE ${Cairo_INCLUDE_DIRS})
+target_link_libraries(projectfileparsertest PRIVATE ${Cairo_LIBS} m)

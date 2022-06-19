@@ -1,10 +1,10 @@
 
 # How to do OS independent file paths?
 [spatialitedatabase]
-    filepath = ""
+    filepath = "/somefile.db"
 
 [background]
-    color = "#ffffff"
+    color = "0,0,255"
 
 [[layer]]
     name = "Cities"
@@ -15,7 +15,7 @@
     thickness = 1
 
     [layer.source]
-        type = "memory"
+        type = "sql"
 
 [[layer]]
     name = "Train Stations"
@@ -26,4 +26,16 @@
     thickness = 1
 
     [layer.source]
-        type = "memory"
+        type = "shapefile"
+
+
+[[layer]]
+    name = "Manhole covers"
+    type = "vector"
+    geometry_type = "point"
+    fill_color = "255,0,0"
+    outline_color = "0,0,255"
+    thickness = 1
+
+    [layer.source]
+        type = "shapefile"
