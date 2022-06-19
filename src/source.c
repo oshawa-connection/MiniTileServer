@@ -12,6 +12,7 @@ static u_int16_t source_id = 0;
 
 struct source {
     u_int16_t id;
+    // TODO: Why do both sources and layers store the geometry type?
     GEOMETRY_TYPE source_geometry_type;
     source_type store_type;
     long number_of_points;

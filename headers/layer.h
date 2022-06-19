@@ -27,6 +27,7 @@ typedef struct layerConfig {
  * @details Something
  */
 typedef struct layer {
+    char * layer_name;
     LAYER_TYPE layerType;
     GEOMETRY_TYPE geometryType;
     color * fill_color;

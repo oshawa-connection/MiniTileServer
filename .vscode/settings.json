@@ -86,6 +86,7 @@
         "sstream": "c",
         "stop_token": "c",
         "condition_variable": "c",
-        "geometry.h": "c"
+        "geometry.h": "c",
+        "errno.h": "c"
     }
 }
