@@ -20,7 +20,7 @@ typedef struct layerConfig {
     char * outline_color;
     char * fill_color;
     float thickness;
-};
+} layerConfig;
 
 /**
  * @brief 
@@ -29,9 +29,8 @@ typedef struct layerConfig {
 typedef struct layer {
     LAYER_TYPE layerType;
     GEOMETRY_TYPE geometryType;
-    color * outline_color;
     color * fill_color;
-    color * stroke_color;
+    color * outline_color;
     float strokeThickness;
     int size;
     source_ptr layer_source;

@@ -8,6 +8,8 @@
 #include "color.h"
 #include "geometry.h"
 
+const char * output_file_name = "myexample.png";
+
 int main(int argc, char *argv[]) {
     time_t t;
     /* Intializes random number generator */
@@ -24,23 +26,22 @@ int main(int argc, char *argv[]) {
     source_apply_bbox(some_source,bboxPtr);
     
     layer some_layer = {
-        .fill_color=createColor(0,0,1,1),
+        .fill_color=create_color(0,0,255,1),
         .geometryType=POINT,
         .layer_source=some_source,
         .layerType=VECTOR_LAYER,
-        .outline_color=createColor(0.7,1,0,1),
-        .size=1,
-        .stroke_color=createColor(0.7,1,0,1),
+        .outline_color=create_color(245, 245, 66,1),
+        .size=10,
         .strokeThickness=1
     };
     
     int x = draw_layer(cr, &some_layer, bboxPtr);
 
     cairo_fill(cr);
-    cairo_surface_write_to_png(surface,"myexample.png");
+    cairo_surface_write_to_png(surface,output_file_name);
     cairo_destroy (cr);
     cairo_surface_destroy(surface);
-    puts("GOODBYE");
+    printf("Wrote output png to %s",output_file_name);
     return EXIT_SUCCESS;
 }
 

@@ -49,11 +49,9 @@ point * get_point_from_source(source_ptr src, uint32_t index) {
     
 
     if (src->store_type == IN_MEMORY) {
-        puts("checking");
         if (index >= src->number_of_points) {
             return NULL;
         }
-        puts("Does it crash here?");
         return src->points[index];
     } else {
         log_error("Only in memory sources are currently supported.");

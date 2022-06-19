@@ -10,15 +10,26 @@
 static regex_t regex;
 static bool isInitialised = false;
 
+/**
+ * @brief Translates from a value like 255 to a float between 0 and 1 
+ * 
+ * @todo Perhaps this could be combined with other interpolate functions
+ * @param rgbValue255 
+ * @return float 
+ */
+float color_interpolate(int rgb_value_255) {
+    return (1.0 - 0) /(255.0 - 0.0) * (rgb_value_255);
+}
 
-color * createColor(int red, int green, int blue, float alpha) {
+color * create_color(int red, int green, int blue, float alpha) {
     color * newColor = (color *)malloc(sizeof(color));
     if (newColor == NULL) {
         return 0;
     }
-    newColor->red=red;
-    newColor->green=green;
-    newColor->blue=blue;
+    newColor->red=color_interpolate(red);
+    
+    newColor->green=color_interpolate(green);
+    newColor->blue=color_interpolate(blue);
     newColor->alpha=alpha;
     return newColor;
 }
@@ -55,7 +66,7 @@ color * parseColorString(char * colorString) {
         exit(EXIT_FAILURE);
     }
     
-    color * newColor = createColor(0,0,0,0.0);
+    color * newColor = create_color(0,0,0,0.0);
 
     for (int groupIndex =1; groupIndex < numberOfGroups;groupIndex ++) {
         regmatch_t currentMatch = groupArray[groupIndex];
