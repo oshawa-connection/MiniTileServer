@@ -13,6 +13,6 @@ typedef struct source * source_ptr;
 
 point * get_point_from_source(source_ptr src, uint32_t index);
 
-int source_apply_bbox(source_ptr src, bbox * bboxPtr);
+int source_apply_bbox(source_ptr src, bbox * bboxPtr, uint32_t max_number_features);
 
 source_ptr create_source(GEOMETRY_TYPE source_geometry_type, source_type store_type);

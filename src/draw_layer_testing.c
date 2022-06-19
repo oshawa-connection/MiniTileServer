@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 
     
     source_ptr some_source = create_source(POINT,IN_MEMORY);
-    source_apply_bbox(some_source,bboxPtr);
+    source_apply_bbox(some_source,bboxPtr,0);
     
     layer some_layer = {
         .fill_color=create_color(0,0,255,1),
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
         .layerType=VECTOR_LAYER,
         .outline_color=create_color(245, 245, 66,1),
         .size=10,
-        .strokeThickness=1
+        .strokeThickness=10
     };
     
     int x = draw_layer(cr, &some_layer, bboxPtr);

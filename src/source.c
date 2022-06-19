@@ -64,24 +64,20 @@ point * get_next_random_point() {
 
 }
 
-
-
-
-
-int initialise_in_memory_store(source_ptr src, bbox * bboxPtr) {
+int initialise_in_memory_store(source_ptr src, bbox * bboxPtr, uint32_t max_number_features) {
     if (src->source_geometry_type == POINT) {
-        const uint32_t NUMBER_OF_FEATURES = 10;
-        src->points = malloc(sizeof(point) * NUMBER_OF_FEATURES);
+        
+        src->points = malloc(sizeof(point) * max_number_features);
         
         point * new_point = NULL;
 
-        for(int i = 0; i<NUMBER_OF_FEATURES;i++) {
+        for(int i = 0; i<max_number_features;i++) {
             double rand_x = (double)(rand()%((int)bboxPtr->max_x - (int)bboxPtr->min_x) + (int)bboxPtr->min_x);
             double rand_y = (double)(rand()%((int)bboxPtr->max_y - (int)bboxPtr->min_y) + (int)bboxPtr->min_y);
             new_point = create_new_point(rand_x,rand_y);
             src->points[i] = new_point;
         }
-        src->number_of_points=NUMBER_OF_FEATURES;
+        src->number_of_points=max_number_features;
     } else {
         log_error("Only point geometries are currently implemented");
         return 1;
@@ -91,9 +87,9 @@ int initialise_in_memory_store(source_ptr src, bbox * bboxPtr) {
 }
 
 
-int source_apply_bbox(source_ptr src, bbox * bboxPtr) {
+int source_apply_bbox(source_ptr src, bbox * bboxPtr, uint32_t max_number_features) {
     if (src->store_type == IN_MEMORY) {
-        int result = initialise_in_memory_store(src,bboxPtr);
+        int result = initialise_in_memory_store(src,bboxPtr,max_number_features);
         return result;
 
     } else {

@@ -7,7 +7,7 @@
 int draw_point_layer(cairo_t *cr, layer * layer_to_draw, bbox * bbox) { 
     cairo_save(cr);
     color * outline_color = layer_to_draw->outline_color;
-    cairo_set_line_width (cr, 1);
+    cairo_set_line_width (cr, layer_to_draw->strokeThickness);
     // cairo_set_source_rgba(cr, 1,1,1,1);
     source_ptr layer_source = layer_to_draw->layer_source;
     point * next_point;
@@ -15,6 +15,7 @@ int draw_point_layer(cairo_t *cr, layer * layer_to_draw, bbox * bbox) {
     while((next_point = get_point_from_source(layer_source,current_point_index)) != NULL) {
         double png_x = dinterpolateX(0,255,bbox,next_point);
         double png_y = dinterpolateY(0,255,bbox,next_point);
+        
         printf("PLOTTING AT: %f, %f\n",png_x,png_y);
 
         // If there is a fill, draw it first, then draw the stroke on top of it.
@@ -60,4 +61,16 @@ int draw_layer(cairo_t *cr, layer * layer_to_draw, bbox * bbox) {
         log_error("Only vector layers are currently supported");
         return 1;
     }
+}
+
+/**
+ * @brief Calculates point at which features will saturate the tile.
+ * This would only work assuming a normal distribtion of points and otherwise might result in weird behaviour that the
+ * user might get annoyed by.
+ * @param layer_to_calc 
+ * @return uint32_t 
+ */
+uint32_t calc_max_number_features_per_tile(layer * layer_to_calc) {
+    // layer_to_calc->size
+    return 0;
 }
