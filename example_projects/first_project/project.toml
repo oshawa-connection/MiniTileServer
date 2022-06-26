@@ -18,7 +18,7 @@
         type = "sql"
 
 [[layer]]
-    name = "Train Stations"
+    # name = "Train Stations"
     type = "vector"
     geometry_type = "point"
     fill_color = "255,0,0"

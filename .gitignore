@@ -18,3 +18,4 @@ client.out
 .DS_Store
 *.png
 runit
+projectfileparsertest

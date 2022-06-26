@@ -146,6 +146,8 @@ TOML_EXTERN int toml_table_ntab(const toml_table_t *tab);
 /* Return the key of a table*/
 TOML_EXTERN const char *toml_table_key(const toml_table_t *tab);
 
+TOML_EXTERN int toml_key_lineno(const toml_table_t *tab, const char *key);
+
 /*--------------------------------------------------------------
  * misc
  */
