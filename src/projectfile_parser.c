@@ -36,9 +36,18 @@ int main(int argc, char *argv[]) {
         int number_of_layers = toml_array_nelem(layer);
         for(int layer_index = 0; layer_index < number_of_layers; layer_index++ ) {
             toml_table_t* current_layer = toml_table_at(layer,layer_index);
+            
             toml_datum_t layer_name = toml_string_in(current_layer, "name");
             if (layer_name.ok) {
                 printf("Layer name is: %s\n",layer_name.u.s);
+            } else {
+                printf("Layer ");
+                break;
+            }
+
+            toml_table_t * current_layer_source = toml_table_in(current_layer,"source");
+            if (0 == current_layer_source) {
+                fprintf(stderr,"");
             }
         }
     }
